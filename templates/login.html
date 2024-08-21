@@ -1,0 +1,51 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Zay Shop - Sign up / Login Form</title>
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/login_alert.css' %}">
+</head>
+<body style="display: flex; flex-direction: column">
+    {% for msg in messages %}
+        <div class="alert alert-danger" style="position: relative; top: -100px">
+          <span class="alert-icon alert-icon-danger">
+            &#9888;
+          </span>
+          <span class="alert-message">{{ msg }}</span>
+        </div>
+    {% endfor %}
+    
+	<div class="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+				<form method="post">
+                    {% csrf_token %}
+                    <a href="{% url 'register' %}" style="text-decoration: none">
+                        <label for="chk" aria-hidden="true">Sign up</label>
+                        <input type="text" name="username" placeholder="Username" required="">
+                        <input type="password" name="password" placeholder="Password">
+                        <input type="password" name="confirm_password" placeholder="Confirm_Password" >
+                        <button type="submit">Sign up</button>
+                    </a>
+				</form>
+			</div>
+            
+            
+            <div class="login">
+                <form method="post">
+                    {% csrf_token %}
+					<label for="chk" aria-hidden="true">Login</label>
+                    <input type="text" name="username" placeholder="Username" required="">
+					<input type="password" name="password" placeholder="Password" required="">
+					<button>Login</button>
+				</form>
+			</div>
+                
+	</div>
+</body>
+</html>
