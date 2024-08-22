@@ -135,16 +135,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "Zay eCommerce",
+    "site_title": "Zay Shop",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "Zay eCommerce",
+    "site_header": "Zay Shop",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "Zay eCommerce",
+    "site_brand": "Zay Shop",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "./apps/static/assets/img/Mars_1.png",
+    "site_logo": ".media/user/mystery_man.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
     "login_logo": "./apps/static/assets/img/Mars_1.png",
@@ -165,11 +165,11 @@ JAZZMIN_SETTINGS = {
     "copyright": "Acme Library Ltd",
 
     # List of model admins to search from the search bar, search bar omitted if excluded
-    # If you want to use a single search field you dont need to use a list, you can use a simple string
+    # If you want to use a single search field you don't need to use a list, you can use a simple string
     "search_model": ["auth.User", "auth.Group"],
 
     # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
-    "user_avatar": "user/mystery_man.png",
+    "user_avatar": "./media/user/mystery_man.png",
 
     ############
     # Top Menu #
@@ -182,7 +182,7 @@ JAZZMIN_SETTINGS = {
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # external url that opens in a new window (Permissions can be added)
-        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"name": "Support", "url": "https://t.me/the_behzod", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},
@@ -197,7 +197,7 @@ JAZZMIN_SETTINGS = {
 
     # Additional links to include in the user menu on the top right ("app" url type is not allowed)
     "usermenu_links": [
-        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"name": "Support", "url": "https://t.me/the_behzod", "new_window": True},
         {"model": "auth.user"}
     ],
 

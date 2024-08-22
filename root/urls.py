@@ -26,7 +26,7 @@ from apps.views import (
     WishListListView, LogoutView, OrderCreateView,
     WishlistDeleteView, BasketListView,
     BasketCreateView, CheckoutView, BasketView,
-    BasketDeleteView,
+    BasketDeleteView, OrderListView,
     send_email, send_msg_bot
 )
 
@@ -51,7 +51,8 @@ urlpatterns = [
     path('basket_delete/<int:pk>/', BasketDeleteView.as_view(), name='basket_delete'),
 
     # Order
-    path('order/<int:pk>/', OrderCreateView.as_view(), name='order'),
+    path('order', OrderListView.as_view(), name='order'),
+    path('order_create/<int:pk>/', OrderCreateView.as_view(), name='order'),
 
 
     # SignUp / SignIn, Logout

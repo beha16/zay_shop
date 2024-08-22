@@ -198,6 +198,10 @@ class OrderCreateView(LoginRequiredMixin, View):
         return redirect('/')
 
 
+class OrderListView(LoginRequiredMixin, TemplateView):
+    template_name = 'order.html'
+
+
 class BasketCreateView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         user = self.request.user
