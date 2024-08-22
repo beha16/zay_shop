@@ -22,27 +22,30 @@
 </head>
 
 <body>
-<!-- Start Top Nav -->
-<nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
-    <div class="container text-light">
-        <div class="w-100 d-flex justify-content-between">
-            <div>
-                <i class="fa fa-envelope mx-2"></i>
-                <a class="navbar-sm-brand text-light text-decoration-none" href="https://mail.google.com/">behzod0824@gmail.com</a>
-                <i class="fa fa-phone mx-2"></i>
-                <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">+998 97 414-22-39</a>
-            </div>
-            <div>
-                <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
-                <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
-                <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
-                <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
+    <!-- Start Top Nav -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
+        <div class="container text-light">
+            <div class="w-100 d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-envelope mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="https://mail.google.com/">behzod0824@gmail.com</a>
+                    <i class="fa fa-phone mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">+998 97 414-22-39</a>
+                </div>
+                <div>
+                    <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
-<!-- Close Top Nav -->
-<nav class="navbar navbar-expand-lg navbar-light shadow">
+    </nav>
+    <!-- Close Top Nav -->
+
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
             <a class="navbar-brand text-success logo h1 align-self-center" href="{% url 'index' %}">
@@ -70,115 +73,124 @@
                         </li>
                     </ul>
                 </div>
+                <div class="navbar align-self-center d-flex">
+                    <div class="dropdown">
+                      <button class="btn dropdown" type="button" data-bs-toggle="dropdown" >
+                        <a class="nav-icon position-relative text-decoration-none" href="#">
+                            <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                            <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                        </a>
+                      </button>
+                      <ul class="dropdown-menu">
+                          {% if request.user.is_authenticated  %}
+                            <li><a class="dropdown-item" href="{% url 'wishlist' %}">Wishlist</a></li>
+                            <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
+                          {% else %}
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                            <li><a class="dropdown-item" href="{% url 'register' %}">Sign up</a></li>
+                          {% endif %}
+                      </ul>
+                    </div>
+
+
+                </div>
             </div>
 
         </div>
     </nav>
-    <div class="container_1">
-        <h1>Order Confirmation</h1>
+    <!-- Close Header -->
 
-        <h2>Recipient Details</h2>
-        <form>
+
+    <form action="" method="get">
+        {% csrf_token %}
+        <div class="container_1">
+            <h1>Order Confirmation</h1>
+    
             <div class="form-group">
                 <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" name="lastName" placeholder="Enter Last Name">
+                <input type="text" id="lastname" name="lastname" placeholder="Enter Last Name">
             </div>
 
             <div class="form-group">
                 <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" name="firstName" placeholder="Enter First Name">
+                <input type="text" id="firstname" name="firstname" placeholder="Enter First Name">
             </div>
 
             <div class="form-group">
                 <label for="phone">Phone Number:</label>
                 <input id="phone" name="phone" pattern="\+998 \d{2} \d{3}-\d{2}-\d{2}" type="tel" minlength="17" maxlength="17" placeholder="+998 __ ___-__-__" data-test-id="input__phone" data-widget-name="ORDER_RECIPIENT_PHONE" class="js-virtual-keyboard-undefined">
             </div>
-
-
-
-
+            
             <div class="subscribe">
                 <input type="checkbox" id="subscribe" name="subscribe">
                 <label for="subscribe" class="subscribe-label">Subscribe to our newsletters and promotions</label>
             </div>
-        </form>
-
-        <h2>Order Details</h2>
-        <div class="order-details">
-            <div class="order-item">
-                <img src="https://www.example.com/images/paper.jpg" alt="Paper" class="order-item-img">
-                <div class="order-item-info">
-                    <h3>Paper for Office Equipment</h3>
-                    <p>Seller: World of stationery</p>
-                    <p>Quantity: 3 pcs</p>
-                </div>
-                <div class="order-item-price">
-                    114 000 сум
-                </div>
+    
+            <h2>Order Details</h2>
+            <div class="order-details">
+                {% for i in my_basket %}
+                    <div class="order-item">
+                        <img src="{{ i.product.images.first.image.url }}" alt="Product" class="order-item-img">
+                        <div>
+                            <div class="order-item-info">
+                                <h3>{{ i.product.name }}</h3>
+                            </div>
+                            <div class="order-item-price">
+                                <p>Quantity: {{ i.quantity }}</p>
+                                <p>$ {{ i.product.price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-
-            <div class="order-item">
-                <img src="https://www.example.com/images/charger.jpg" alt="Charger" class="order-item-img">
-                <div class="order-item-info">
-                    <h3>Fast Charging Device</h3>
-                    <p>Seller: iApple Store</p>
-                    <p>Quantity: 3 pcs</p>
-                </div>
-                <div class="order-item-price">
-                    207 000 сум
-                </div>
+    
+            <div class="total">
+                Total: $
             </div>
         </div>
 
-        <div class="total">
-            Total: 321 000 сум
+        <div class="container_1">
+            <h2>Payment method</h2>
+    
+            <div class="payment-method">
+                <input type="radio" name="payment-method" id="card-online" class="radio-button">
+                <label for="card-online">
+                    <div class="payment-info">
+                        <h3>By card online</h3>
+                        <p>UZCARD, HUMO, Visa, MasterCard</p>
+                    </div>
+                    <div class="payment-logos">
+                        <img src="{% static 'assets/img/uzcard.svg' %}" alt="UZCARD">
+                        <img src="{% static 'assets/img/humo.svg' %}" alt="HUMO">
+                        <img src="{% static 'assets/img/visa.svg' %}" alt="VISA">
+                        <img src="{% static 'assets/img/master_card.svg' %}" alt="MASTERCARD">
+                    </div>
+                </label>
+            </div>
+    
+            
+            <div class="payment-method">
+                <input type="radio" name="payment-method" id="uzum-bank" class="radio-button">
+                <label for="uzum-bank">
+                    <div class="payment-info">
+                        <h3>Uzum Bank</h3>
+                        <p>We will redirect you to the Uzum Bank application, where you can pay for the order.</p>
+                    </div>
+                </label>
+            </div>
+            
+    
+            <div class="payment-method">
+                <input type="radio" name="payment-method" id="cash-on-delivery" class="radio-button">
+                <label for="cash-on-delivery">
+                    <div class="payment-info">
+                        <h3>Pyment on delivery</h3>
+                        <p>To the courier - only in cash and by QR code, at delivery points - in cash, by QR code and card</p>
+                    </div>
+                </label>
+            </div>
         </div>
-
-    </div>
-
-    <div class="container_1">
-        <h2>Payment method</h2>
-
-        <div class="payment-method">
-            <input type="radio" name="payment-method" id="card-online" class="radio-button">
-            <label for="card-online">
-                <div class="payment-info">
-                    <h3>By card online</h3>
-                    <p>UZCARD, HUMO, Visa, MasterCard</p>
-                </div>
-                <div class="payment-logos">
-                    <img src="{% static 'assets/img/uzcard.svg' %}" alt="UZCARD">
-                    <img src="{% static 'assets/img/humo.svg' %}" alt="HUMO">
-                    <img src="{% static 'assets/img/visa.svg' %}" alt="VISA">
-                    <img src="{% static 'assets/img/master_card.svg' %}" alt="MASTERCARD">
-                </div>
-            </label>
-        </div>
-
-        
-        <div class="payment-method">
-            <input type="radio" name="payment-method" id="uzum-bank" class="radio-button">
-            <label for="uzum-bank">
-                <div class="payment-info">
-                    <h3>Uzum Bank</h3>
-                    <p>We will redirect you to the Uzum Bank application, where you can pay for the order.</p>
-                </div>
-            </label>
-        </div>
-        
-
-        <div class="payment-method">
-            <input type="radio" name="payment-method" id="cash-on-delivery" class="radio-button">
-            <label for="cash-on-delivery">
-                <div class="payment-info">
-                    <h3>Pyment on delivery</h3>
-                    <p>To the courier - only in cash and by QR code, at delivery points - in cash, by QR code and card</p>
-                </div>
-            </label>
-        </div>
-
-
-    </div>
 
         <div class="container_1">
             <h4>Your order</h4>
@@ -187,117 +199,104 @@
                 <p><b>$</b></p>
             </div>
             <a href="#" class="add-to-cart">Submit</a>
-        </div> 
-
-
-
-
-
-
-<footer class="bg-dark" id="tempaltemo_footer">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-4 pt-5">
-                <h2 class="h2 text-success border-bottom pb-3 border-light logo">Zay Shop</h2>
-                <ul class="list-unstyled text-light footer-link-list">
-                    <li>
-                        <i class="fas fa-map-marker-alt fa-fw"></i>
-                        123 Consectetur at ligula 10660
-                    </li>
-                    <li>
-                        <i class="fa fa-phone fa-fw"></i>
-                        <a class="text-decoration-none" href="tel:010-020-0340">+998 97 414-22-39</a>
-                    </li>
-                    <li>
-                        <i class="fa fa-envelope fa-fw"></i>
-                        <a class="text-decoration-none" href="mailto:info@company.com">behzod0824@gmail.com</a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-md-4 pt-5">
-                <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
-                <ul class="list-unstyled text-light footer-link-list">
-                    <li><a class="text-decoration-none" href="#">Luxury</a></li>
-                    <li><a class="text-decoration-none" href="#">Sport Wear</a></li>
-                    <li><a class="text-decoration-none" href="#">Men's Shoes</a></li>
-                    <li><a class="text-decoration-none" href="#">Women's Shoes</a></li>
-                    <li><a class="text-decoration-none" href="#">Popular Dress</a></li>
-                    <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
-                    <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-4 pt-5">
-                <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
-                <ul class="list-unstyled text-light footer-link-list">
-                    <li><a class="text-decoration-none" href="#">Home</a></li>
-                    <li><a class="text-decoration-none" href="#">About Us</a></li>
-                    <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
-                    <li><a class="text-decoration-none" href="#">FAQs</a></li>
-                    <li><a class="text-decoration-none" href="#">Contact</a></li>
-                </ul>
-            </div>
-
         </div>
+    </form>
 
-        <div class="row text-light mb-4">
-            <div class="col-12 mb-3">
-                <div class="w-100 my-3 border-top border-light"></div>
+
+
+
+
+
+    <!-- Start Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+        <div class="container" style="margin-bottom: -25px">
+            <div class="row">
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Zay Shop</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt fa-fw"></i>
+                            City Tashkent, Beruniy street 35A, Tinchlik metro station.
+                        </li>
+                        <li>
+                            <i class="fa fa-phone fa-fw"></i>
+                            <a class="text-decoration-none" href="tel:010-020-0340">+998 97 414-22-39</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope fa-fw"></i>
+                            <a class="text-decoration-none" href="mailto:info@company.com">behzod0824@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Products</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" href="#">Luxury</a></li>
+                        <li><a class="text-decoration-none" href="#">Sport Wear</a></li>
+                        <li><a class="text-decoration-none" href="#">Men's Shoes</a></li>
+                        <li><a class="text-decoration-none" href="#">Women's Shoes</a></li>
+                        <li><a class="text-decoration-none" href="#">Popular Dress</a></li>
+                        <li><a class="text-decoration-none" href="#">Gym Accessories</a></li>
+                        <li><a class="text-decoration-none" href="#">Sport Shoes</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" href="{% url 'index' %}">Home</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'about' %}">About Us</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'contact' %}">Shop Locations</a></li>
+                        <li><a class="text-decoration-none" href="#">FAQs</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+
             </div>
-            <div class="col-auto me-auto">
-                <ul class="list-inline text-left footer-icons">
-                    <li class="list-inline-item border border-light rounded-circle text-center">
-                        <a class="text-light text-decoration-none" target="_blank" href="http://facebook.com/"><i class="fab fa-facebook-f fa-lg fa-fw"></i></a>
-                    </li>
-                    <li class="list-inline-item border border-light rounded-circle text-center">
-                        <a class="text-light text-decoration-none" target="_blank" href="https://www.instagram.com/"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
-                    </li>
-                    <li class="list-inline-item border border-light rounded-circle text-center">
-                        <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/"><i class="fab fa-twitter fa-lg fa-fw"></i></a>
-                    </li>
-                    <li class="list-inline-item border border-light rounded-circle text-center">
-                        <a class="text-light text-decoration-none" target="_blank" href="https://www.linkedin.com/"><i class="fab fa-linkedin fa-lg fa-fw"></i></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-auto">
-                <label class="sr-only" for="subscribeEmail">Email address</label>
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address">
-                    <div class="input-group-text btn-success text-light">Subscribe</div>
+
+            <div class="row text-light mb-4">
+                <div class="col-12 mb-3">
+                    <div class="w-100 my-3 border-top border-light"></div>
+                </div>
+                <div class="col-auto me-auto">
+                    <ul class="list-inline text-left footer-icons">
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="http://facebook.com/"><i class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://www.instagram.com/"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/"><i class="fab fa-twitter fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://www.linkedin.com/"><i class="fab fa-linkedin fa-lg fa-fw"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-auto">
+                    <label class="sr-only" for="subscribeEmail">Email address</label>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address">
+                        <div class="input-group-text btn-success text-light">Subscribe</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="w-100 bg-black py-3">
-        <div class="container">
-            <div class="row pt-2">
-                <div class="col-12">
-                    <p class="text-left text-light">
-                        Copyright &copy; 2021 Company Name
-                        | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</footer>
-<!-- End Footer -->
+    </footer>
+    <!-- End Footer -->
 
 
 
-<!-- Start Script -->
-<script src="{% static 'assets/js/jquery-1.11.0.min.js' %}"></script>
-<script src="{% static 'assets/js/jquery-migrate-1.2.1.min.js' %}"></script>
-<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
-<script src="{% static 'assets/js/templatemo.js' %}"></script>
-<script src="{% static 'assets/js/custom.js' %}"></script>
-
-
-<!-- End Script -->
+    <!-- Start Script -->
+    <script src="{% static 'assets/js/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-migrate-1.2.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/templatemo.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    <!-- End Script -->
 </body>
 </html>

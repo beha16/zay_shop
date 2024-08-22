@@ -104,7 +104,7 @@
                       <ul class="dropdown-menu">
                           {% if request.user.is_authenticated  %}
                             <li><a class="dropdown-item" href="{% url 'wishlist' %}">Wishlist</a></li>
-                            <li><a class="dropdown-item" href="#">Orders</a></li>
+                            <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
                           {% else %}
                             <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
@@ -270,7 +270,7 @@
 
     <!-- Start Footer -->
     <footer class="bg-dark" id="tempaltemo_footer">
-        <div class="container">
+        <div class="container" style="margin-bottom: -25px">
             <div class="row">
 
                 <div class="col-md-4 pt-5">
@@ -278,7 +278,7 @@
                     <ul class="list-unstyled text-light footer-link-list">
                         <li>
                             <i class="fas fa-map-marker-alt fa-fw"></i>
-                            123 Consectetur at ligula 10660
+                            City Tashkent, Beruniy street 35A, Tinchlik metro station.
                         </li>
                         <li>
                             <i class="fa fa-phone fa-fw"></i>
@@ -307,11 +307,11 @@
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="#">Home</a></li>
-                        <li><a class="text-decoration-none" href="#">About Us</a></li>
-                        <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'index' %}">Home</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'about' %}">About Us</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'contact' %}">Shop Locations</a></li>
                         <li><a class="text-decoration-none" href="#">FAQs</a></li>
-                        <li><a class="text-decoration-none" href="#">Contact</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'contact' %}">Contact</a></li>
                     </ul>
                 </div>
 
@@ -342,19 +342,6 @@
                     <div class="input-group mb-2">
                         <input type="text" class="form-control bg-dark border-light" id="subscribeEmail" placeholder="Email address">
                         <div class="input-group-text btn-success text-light">Subscribe</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="w-100 bg-black py-3">
-            <div class="container">
-                <div class="row pt-2">
-                    <div class="col-12">
-                        <p class="text-left text-light">
-                            Copyright &copy; 2021 Company Name 
-                            | Designed by <a rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a>
-                        </p>
                     </div>
                 </div>
             </div>

@@ -1,8 +1,14 @@
-body{margin-top:20px;}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-
-.container {
+.container_wishlist {
+    max-width: 1260px;
+    margin: 0 auto;
     padding-top: 150px;
+    padding-bottom: 150px;
 }
 
 .user-info-wrapper {

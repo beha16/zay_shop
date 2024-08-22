@@ -20,7 +20,7 @@
 
     <!-- Slick -->
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick-theme.css' %}"
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick-theme.css' %}">
     
     {% comment %}
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">	
@@ -29,9 +29,31 @@
     <link href="{% static 'assets/css/wish_list.css' %}" rel="stylesheet">
 </head>
 <body>
+    
+    <!-- Start Top Nav -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-light d-none d-lg-block" id="templatemo_nav_top">
+        <div class="container text-light">
+            <div class="w-100 d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-envelope mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="https://mail.google.com/">behzod0824@gmail.com</a>
+                    <i class="fa fa-phone mx-2"></i>
+                    <a class="navbar-sm-brand text-light text-decoration-none" href="tel:010-020-0340">+998 97 414-22-39</a>
+                </div>
+                <div>
+                    <a class="text-light" href="https://fb.com/templatemo" target="_blank" rel="sponsored"><i class="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-sm fa-fw me-2"></i></a>
+                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Close Top Nav -->
+
 
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light shadow" style="margin-top: -165px">
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
         <div class="container d-flex justify-content-between align-items-center">
 
             <a class="navbar-brand text-success logo h1 align-self-center" href="{% url 'index' %}">
@@ -74,7 +96,7 @@
                     <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                         <i class="fa fa-fw fa-search text-dark mr-2"></i>
                     </a>
-                    <a class="nav-icon position-relative text-decoration-none" href="{% url 'wishlist' %}">
+                    <a class="nav-icon position-relative text-decoration-none" href="{% url 'basket' %}">
                         <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">{{ wishlist.count }}</span>
                     </a>
@@ -88,8 +110,8 @@
                       </button>
                       <ul class="dropdown-menu">
                           {% if request.user.is_authenticated  %}
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Orders</a></li>
+                            <li><a class="dropdown-item" href="{% url 'wishlist' %}">Wishlist</a></li>
+                            <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
                           {% else %}
                             <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
@@ -106,8 +128,7 @@
     </nav>
     <!-- Close Header -->
 
-
-<div class="container padding-bottom-3x mb-2">
+<div class="container_wishlist padding-bottom-3x mb-2">
     <div class="row">
         <div class="col-lg-4">
             <aside class="user-info-wrapper">
@@ -167,9 +188,6 @@
                             </tr>
                         {% endfor %}
                         
-                        
-                        
-                    
                     </tbody>
                 </table>
             </div>
@@ -179,8 +197,8 @@
    
    
     <!-- Start Footer -->
-    <footer class="bg-dark" id="tempaltemo_footer" style="margin-top: 200px; margin-bottom: -30px">
-        <div class="container">
+    <footer class="bg-dark" id="tempaltemo_footer">
+        <div class="container" style="margin-bottom: -25px">
             <div class="row">
 
                 <div class="col-md-4 pt-5">
@@ -188,15 +206,15 @@
                     <ul class="list-unstyled text-light footer-link-list">
                         <li>
                             <i class="fas fa-map-marker-alt fa-fw"></i>
-                            123 Consectetur at ligula 10660
+                            City Tashkent, Beruniy street 35A, Tinchlik metro station.
                         </li>
                         <li>
                             <i class="fa fa-phone fa-fw"></i>
-                            <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                            <a class="text-decoration-none" href="tel:010-020-0340">+998 97 414-22-39</a>
                         </li>
                         <li>
                             <i class="fa fa-envelope fa-fw"></i>
-                            <a class="text-decoration-none" href="mailto:info@company.com">info@company.com</a>
+                            <a class="text-decoration-none" href="mailto:info@company.com">behzod0824@gmail.com</a>
                         </li>
                     </ul>
                 </div>
@@ -217,11 +235,11 @@
                 <div class="col-md-4 pt-5">
                     <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
                     <ul class="list-unstyled text-light footer-link-list">
-                        <li><a class="text-decoration-none" href="#">Home</a></li>
-                        <li><a class="text-decoration-none" href="#">About Us</a></li>
-                        <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'index' %}">Home</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'about' %}">About Us</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'contact' %}">Shop Locations</a></li>
                         <li><a class="text-decoration-none" href="#">FAQs</a></li>
-                        <li><a class="text-decoration-none" href="#">Contact</a></li>
+                        <li><a class="text-decoration-none" href="{% url 'contact' %}">Contact</a></li>
                     </ul>
                 </div>
 
@@ -256,7 +274,6 @@
                 </div>
             </div>
         </div>
-
 
     </footer>
     <!-- End Footer -->

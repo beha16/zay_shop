@@ -257,5 +257,15 @@ class BasketListView(LoginRequiredMixin, ListView):
         return context
 
 
-class CheckoutView(LoginRequiredMixin, TemplateView):
+class CheckoutView(LoginRequiredMixin, ListView):
+    model = Basket
+    context_object_name = 'basket'
     template_name = 'checkout.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        user = self.request.user.pk
+        my_basket = Basket.objects.filter(user=user)
+        context['my_basket'] = my_basket
+        # print(my_basket)
+        return context

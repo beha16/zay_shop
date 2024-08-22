@@ -51,8 +51,8 @@ urlpatterns = [
     path('basket_delete/<int:pk>/', BasketDeleteView.as_view(), name='basket_delete'),
 
     # Order
-    path('order', OrderListView.as_view(), name='order'),
-    path('order_create/<int:pk>/', OrderCreateView.as_view(), name='order'),
+    path('orders/', OrderListView.as_view(), name='orders'),
+    path('order_create/<int:pk>/', OrderCreateView.as_view(), name='order_create'),
 
 
     # SignUp / SignIn, Logout

@@ -152,8 +152,8 @@ input[type="checkbox"] {
 }
 
 .order-item-img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     margin-right: 20px;
 }
 
@@ -164,6 +164,8 @@ input[type="checkbox"] {
 .order-item-price {
     font-weight: bold;
     color: #333;
+    display: flex;
+    justify-content: space-between;
 }
 
 .total {
