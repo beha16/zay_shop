@@ -212,10 +212,21 @@
             {% for i in products %}
                 {% if i.top_seller == True %}
                 	<div class="col-12 col-md-4 p-5 mt-3">
-                    <a href="{% url 'shop_detail' i.pk %}"><img src="{{ i.images.first.image.url }}" class=" img-fluid border"></a>
-                    <h5 class="text-center mt-3 mb-3">{{ i.name }}</h5>
-                    <p class="text-center"><a class="btn btn-success" href="{% url 'basket_view' i.pk %}">Go Shop</a></p>
-                </div>
+                        <div class="card mb-4 product-wap rounded-0">
+                            <div class="card rounded-0" style="border: none; border-style: none">
+                                <img class="card-img rounded-0 img-fluid" src="{{ i.images.first.image.url }}">
+                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                    <ul class="list-unstyled">
+                                        <li><a class="btn btn-success text-white" href="{% url 'like' i.pk %}"><i class="far fa-heart"></i></a></li>
+                                        <li><a class="btn btn-success text-white mt-2" href="{% url 'shop_detail' i.pk %}"><i class="far fa-eye"></i></a></li>
+                                        <li><a class="btn btn-success text-white mt-2" href="{% url 'basket_create' i.pk %}"><i class="fas fa-cart-plus"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="text-center mt-3 mb-3">{{ i.name }}</h5>
+                        <p class="text-center"><a class="btn btn-success" href="{% url 'basket_view' i.pk %}">Go Shop</a></p>
+                    </div>
                 {% endif %}
             {% endfor %}
         </div>
@@ -238,29 +249,53 @@
             <div class="row">
                 
                 {% for i in products %}
-                    
-                    <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="{% url 'shop_detail' i.pk %}">
-                            <img src="{{ i.images.first.image.url }}" class="card-img-top" alt="...">
-                            {% if i.is_new %}
-                                <span class="badge rounded-pill bg-success position-absolute mt-2 me-2 z-index-2 top-0 end-0">New</span>
-                            {% endif %} 
-                        </a>
-                        <div class="card-body">
-                            <a href="{% url 'shop_detail' i.pk %}" class="h2 text-decoration-none text-dark">{{ i.name }}</a>
-                            <div style="display: flex; gap: 30px">
-                                <p class="card-text">
-                                Colors : {{ i.colors }}
-                                </p>
-                                <button class="btn"><a href="{% url 'basket_create' i.pk %}"> <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1" style="font-size: 23px"></i> </a> </button>
+                    	<div class="col-md-4">
+                        <div class="card mb-4 product-wap rounded-0">
+                            <div class="card rounded-0">
+                                <img class="card-img rounded-0 img-fluid" src="{{ i.images.first.image.url }}">
+                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                    <ul class="list-unstyled">
+                                        <li><a class="btn btn-success text-white" href="{% url 'like' i.pk %}"><i class="far fa-heart"></i></a></li>
+                                        <li><a class="btn btn-success text-white mt-2" href="{% url 'shop_detail' i.pk %}"><i class="far fa-eye"></i></a></li>
+                                        <li><a class="btn btn-success text-white mt-2" href="{% url 'basket_create' i.pk %}"><i class="fas fa-cart-plus"></i></a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <p class="text-muted text-right">Price : {{ i.price }}$</p>
+                            <div class="card-body">
+                                <a href="{% url 'shop_detail' i.pk %}" class="h2 text-decoration-none text-dark">{{ i.name }}</a>
+                                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                                    {% if i.category == Phone %}
+                                        <li>M/L/X/XL</li>
+                                    {% endif %}
+
+                                    <li class="pt-2">
+                                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
+                                    </li>
+                                </ul>
+                                <ul class="list-unstyled d-flex justify-content-center mb-1">
+                                    {% comment %}
+                                    	<li>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                    </li>
+                                    {% endcomment %}
+
+                                </ul>
+                                <div style="display: flex; flex-direction: column; padding-top: 15px">
+                                    <p class=" mb-0">Color: {{ i.colors }}</p>
+                                    <p class="text-muted text-right">Price : {{ i.price }}$</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                    
-                {% endfor %}
+                    {% endfor %}
                 
             </div>
         </div>

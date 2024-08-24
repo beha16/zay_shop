@@ -5,8 +5,8 @@ from .models import User, Product, ProductImage, Order, Wishlist, Category, Bask
 
 
 # admin.site.register(ProductImage)
-admin.site.register(Order)
 admin.site.register(Category)
+
 
 class ProductImageAdmin(admin.StackedInline):
     model = ProductImage
@@ -26,19 +26,19 @@ class UserAdmin(admin.ModelAdmin):
     list_filter = ('username', 'email')
 
 
-
 @admin.register(Wishlist)
 class WishlistAdmin(admin.ModelAdmin):
     list_display = ('user', 'product')
     list_filter = ('user', 'product')
 
 
-
-
-
-
-
 @admin.register(Basket)
 class BasketAdmin(admin.ModelAdmin):
     list_display = ('product', 'user')
+    list_filter = ('user', 'product')
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('user', 'product')
     list_filter = ('user', 'product')

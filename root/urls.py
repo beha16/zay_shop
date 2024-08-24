@@ -52,7 +52,7 @@ urlpatterns = [
 
     # Order
     path('orders/', OrderListView.as_view(), name='orders'),
-    path('order_create/<int:pk>/', OrderCreateView.as_view(), name='order_create'),
+    path('order_create/', OrderCreateView.as_view(), name='order_create'),
 
 
     # SignUp / SignIn, Logout

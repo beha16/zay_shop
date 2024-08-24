@@ -67,10 +67,9 @@ class ProductImage(BaseModel):
 class Order(BaseModel):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    email = models.EmailField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=0)
+    quantity = models.IntegerField(default=1)
 
 
     def __str__(self) -> str:
@@ -97,6 +96,8 @@ class Basket(BaseModel):
     @property
     def is_stock(self):
         return self.product.quantity > 0
+
+
 
     def __str__(self) -> str:
         return self.product.name

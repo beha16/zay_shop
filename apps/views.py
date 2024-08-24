@@ -1,7 +1,7 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
@@ -187,14 +187,13 @@ class LogoutView(View):
 class OrderCreateView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         user = self.request.user
-        pk = self.kwargs.get('pk')
-        product = Product.objects.filter(pk=pk).first()
-        if user and pk:
-            if not Order.objects.filter(user=user, product=product).exists():
-                Order.objects.create(
-                    product=product,
-                    user=user
-                )
+        first_name = self.request.GET.get('firstname')
+        last_name = self.request.GET.get('lastname')
+        xurlangan = self.request.GET.get('xurlangan')
+        pk = self.request.GET.get('pk')
+        print(pk)
+        print(xurlangan)
+
         return redirect('/')
 
 
@@ -249,11 +248,15 @@ class BasketListView(LoginRequiredMixin, ListView):
     template_name = 'basket.html'
 
     def get_context_data(self, **kwargs):
+        l = []
         context = super(ListView, self).get_context_data(**kwargs)
         user = self.request.user.pk
         my_basket = Basket.objects.filter(user=user)
+        for basket in my_basket:
+            l.append(basket.id)
+        context['basket_id'] = l
         context['my_basket'] = my_basket
-        # print(my_basket)
+        print(l)
         return context
 
 

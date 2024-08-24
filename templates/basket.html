@@ -120,39 +120,42 @@
     </nav>
     <!-- Close Header -->
     
-
-    {% for i in my_basket %}
-        <div class="container_1">
-            <div class="product-image">
-                <img src="{{ i.product.images.first.image.url }}" alt="Product Image">
-            </div>
-            <div class="product-details">
-                <div style="display: flex; justify-content: space-between; align-items: center">
-                    <h1 class="product-title" >{{ i.product.name }}</h1>
-                    <a href="{% url 'basket_delete' i.product.pk %}" style="display: flex; gap: 5px; text-decoration: none">
-                        <img style="height: 20px; width: 20px" src="{% static 'assets/img/trash.png' %}" alt="trash">
-                        <p style="color: black">delete</p>
-                    </a>
+<div class="box_basket">
+    <div>
+        {% for i in my_basket %}
+            <div class="container_1">
+                <div class="product-image">
+                    <img src="{{ i.product.images.first.image.url }}" alt="Product Image">
                 </div>
-                <div class="product_display">
-                    <div class="product-info">
-                        <p><strong>Color:</strong> {{ i.product.colors }}</p>
-                        <p><strong>Price:</strong> {{ i.product.price }}$</p>
+                <div class="product-details">
+                    <div style="display: flex; justify-content: space-between; align-items: center">
+                        <h1 class="product-title" >{{ i.product.name }}</h1>
+                        <a href="{% url 'basket_delete' i.product.pk %}" style="display: flex; gap: 5px; text-decoration: none">
+                            <img style="height: 20px; width: 20px" src="{% static 'assets/img/trash.png' %}" alt="trash">
+                            <p style="color: black">delete</p>
+                        </a>
                     </div>
-                    <div class="product-quantity">
-                        <div class="quantity-control">
-                            <button id="decrease-quantity_{{ i.product.pk }}" disabled>-</button>
+                    <div class="product_display">
+                        <div class="product-info">
+                            <p><strong>Color:</strong> {{ i.product.colors }}</p>
+                            <p><strong>Price:</strong> {{ i.product.price }}$</p>
                         </div>
-                        <div class="quantity-value" id="quantity-value_{{ i.product.pk }}">1</div>
-                        <div class="quantity-control">
-                            <button id="increase-quantity_{{ i.product.pk }}">+</button>
+                        <div class="product-quantity">
+                            <div class="quantity-control">
+                                <button id="decrease-quantity_{{ i.product.pk }}" disabled>-</button>
+                            </div>
+                            <div class="quantity-value" id="quantity-value_{{ i.product.pk }}">1</div>
+                            <div class="quantity-control">
+                                <button id="increase-quantity_{{ i.product.pk }}">+</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="clear-both"></div>
             </div>
-            <div class="clear-both"></div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+        
+    </div>
 
     <div class="container_2">
         <h4>Your order</h4>
@@ -162,6 +165,8 @@
         </div>
         <a href="{% url 'checkout' %}" class="add-to-cart">Buy now</a>
     </div>
+</div>
+    
 
 
 
