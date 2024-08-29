@@ -7,7 +7,7 @@ from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from django.views.generic import TemplateView, ListView, CreateView, FormView, View, DetailView
 from httpx import post, get
-
+import json
 from apps.form import UserSignUpForm, UserLoginForm
 from apps.mixins import NotLoginRequiredMixin
 from apps.models import Product, User, Wishlist, Order, Basket
@@ -189,16 +189,42 @@ class OrderCreateView(LoginRequiredMixin, View):
         user = self.request.user
         first_name = self.request.GET.get('firstname')
         last_name = self.request.GET.get('lastname')
+        phone = self.request.GET.get('phone')
         xurlangan = self.request.GET.get('xurlangan')
         pk = self.request.GET.get('pk')
-        print(pk)
-        print(xurlangan)
+
+        print(phone)
+        if xurlangan:
+            try:
+                basket_ids = json.loads(xurlangan)
+                print(basket_ids)
+                for basket_id in basket_ids:
+                    basket = Basket.objects.filter(pk=int(basket_id)).first()
+                    Order.objects.create(
+                        user=user,
+                        first_name=first_name,
+                        last_name=last_name,
+                        phone_number=phone,
+                        product=basket.product
+                    )
+            except json.JSONDecodeError:
+                print("xurlangan parametrida noto'g'ri JSON formati")
 
         return redirect('/')
 
 
-class OrderListView(LoginRequiredMixin, TemplateView):
+class OrderListView(LoginRequiredMixin, ListView):
     template_name = 'order.html'
+    model = Order
+    context_object_name = 'orders'
+
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        user = self.request.user.pk
+        my_orders = Order.objects.filter(user=user)
+
+        context['my_orders'] = my_orders
+        return context
 
 
 class BasketCreateView(LoginRequiredMixin, View):
@@ -217,6 +243,7 @@ class BasketCreateView(LoginRequiredMixin, View):
 
 
 class BasketView(LoginRequiredMixin, View):
+    login_url = '/login'
     def get(self, *args, **kwargs):
         user = self.request.user
         pk = self.kwargs.get('pk')
@@ -256,7 +283,6 @@ class BasketListView(LoginRequiredMixin, ListView):
             l.append(basket.id)
         context['basket_id'] = l
         context['my_basket'] = my_basket
-        print(l)
         return context
 
 
@@ -266,9 +292,14 @@ class CheckoutView(LoginRequiredMixin, ListView):
     template_name = 'checkout.html'
 
     def get_context_data(self, **kwargs):
+        l = []
         context = super(ListView, self).get_context_data(**kwargs)
         user = self.request.user.pk
         my_basket = Basket.objects.filter(user=user)
+        context['my_basket'] = my_basket
+        for basket in my_basket:
+            l.append(basket.id)
+        context['basket_id'] = l
         context['my_basket'] = my_basket
         # print(my_basket)
         return context
